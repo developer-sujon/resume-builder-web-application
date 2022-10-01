@@ -1,0 +1,8 @@
+@import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+/* write here custom apply class */
+@import "../src/assets/css/style.css";
+
+@import "tailwindcss/utilities";

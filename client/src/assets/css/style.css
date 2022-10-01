@@ -1,0 +1,8 @@
+.ql-editor {
+  @apply dark:text-white;
+}
+
+
+.ql-editor {
+  height: 150px !important;
+}
