@@ -56,24 +56,24 @@ const PersonalInfo = (values) => {
 
         <div className="px-[15px] w-full md:w-[33.333333%]">
           <label
-            htmlFor="Email"
+            htmlFor="Dejection"
             className="block my-2 md:my-0 md:mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
-            Email Address
+            Dejection
           </label>
 
           <Field
-            id="Email"
+            id="Dejection"
             type="text"
-            name="Email"
-            placeholder="name@example.com"
+            name="Dejection"
+            placeholder="Ui Ux Designer"
             component={MyInput}
           />
           <p
             id="filled_error_help"
             className="mt-2 text-md text-red-600 dark:text-red-400"
           >
-            <ErrorMessage name="Email" />
+            <ErrorMessage name="Dejection" />
           </p>
         </div>
       </div>

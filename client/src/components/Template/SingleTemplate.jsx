@@ -1,29 +1,22 @@
 //External Import
 import { forwardRef, useRef } from "react";
-import { AiFillPhone, AiOutlineHome, AiOutlinePrinter } from "react-icons/ai";
+import {
+  AiFillPhone,
+  AiOutlineHome,
+  AiOutlinePrinter,
+  AiOutlineEye,
+} from "react-icons/ai";
 import { BiEnvelope, BiArrowBack } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import ReactToPrint from "react-to-print";
+import parse from "html-react-parser";
 
 const SingleTemplate = () => {
   const componentRef = useRef();
   const { id } = useParams();
   const { TemplateList } = useSelector((state) => state.Template);
-
-  const gettemplate = () => {
-    switch (id) {
-      case "1": {
-        return <SingleTemplateOne ref={componentRef} />;
-      }
-      case "2": {
-        return <SingleTemplateTwo ref={componentRef} />;
-      }
-      default: {
-        <SingleTemplateOne ref={componentRef} />;
-      }
-    }
-  };
+  const { UserDetails } = useSelector((state) => state.User);
 
   return (
     <section className="min-h-screen bg-gray-50 dark:bg-gray-900  py-10">
@@ -41,7 +34,11 @@ const SingleTemplate = () => {
           />
         </div>
 
-        {gettemplate()}
+        {id === "1" ? (
+          <SingleTemplateOne UserDetails={UserDetails} ref={componentRef} />
+        ) : (
+          <SingleTemplateTwo UserDetails={UserDetails} ref={componentRef} />
+        )}
       </div>
     </section>
   );
@@ -49,7 +46,9 @@ const SingleTemplate = () => {
 
 export default SingleTemplate;
 
-const SingleTemplateOne = forwardRef((props, ref) => {
+const SingleTemplateOne = forwardRef(({ UserDetails }, ref) => {
+  console.log(UserDetails);
+
   return (
     <div className="w-[800px] m-auto" ref={ref}>
       <div className="flex mx-[-15px] bg-[#151b29] text-[white]">
@@ -61,122 +60,145 @@ const SingleTemplateOne = forwardRef((props, ref) => {
               alt="user"
             />
             <p className="text-white text-[40px] mt-3">
-              MANOJ <span>ADHIKARI</span>
+              {UserDetails?.FullName}
             </p>
-            <p className="text-white text-xl mt-2">UI / UX Designer</p>
+            <p className="text-white text-xl mt-2">{UserDetails?.Dejection}</p>
           </div>
         </div>
       </div>
       <div className="flex mx-[-15px]  text-[#7b7b7b] bg-white">
-        <div className="px-[15px] w-full md:w-4/12">
+        <div className="px-[15px] w-full md:w-5/12">
           <div className="p-5">
             <p className="text-lg uppercase font-semibold my-5 text-[#151b29]">
               Contact
             </p>
-            <p>
-              <AiFillPhone className="inline" /> &nbsp;&nbsp;898392888
-            </p>
-            <p>
-              <BiEnvelope className="inline" /> &nbsp;&nbsp;dummymail.com
-            </p>
-            <p>
-              <AiOutlineHome className="inline" /> &nbsp;&nbsp;United Kingdom
-            </p>
-            <br />
-            <p className="text-lg uppercase font-semibold my-5 text-[#151b29]">
-              my skills
-            </p>
-            <ul className="skills">
-              <li>
-                <span>Web Design</span>
-              </li>
-              <li>
-                <span>Grapic Design</span>
-              </li>
-              <li>
-                <span>HTML-5</span>
-              </li>
-              <li>
-                <span>CSS-3</span>
-              </li>
-              <li>
-                <span>Java Script</span>
-              </li>
-              <li>
-                <span>Jquery</span>
-              </li>
-            </ul>
-            <br />
-            <p className="text-lg uppercase font-semibold my-5 text-[#151b29]">
-              awards
-            </p>
-            <p>CSS Design Awards</p>
-            <p>D&amp;AD Awards</p>
-            <p>CSS Winner Awards</p>
-            <p>The Shorty Awards</p>
-            <p>Awwwards</p>
-            <br />
-            <p className="head">Languages</p>
-            <p>Hindi</p>
-            <p>English</p>
+
+            {UserDetails?.Phone && (
+              <p>
+                <AiFillPhone className="inline" /> &nbsp;&nbsp;
+                {UserDetails?.Phone}
+              </p>
+            )}
+
+            {UserDetails?.Email && (
+              <p>
+                <BiEnvelope className="inline" /> &nbsp;&nbsp;
+                {UserDetails?.Email}
+              </p>
+            )}
+
+            {UserDetails?.Address && (
+              <>
+                <p>
+                  <AiOutlineHome className="inline" /> &nbsp;&nbsp;
+                  {UserDetails?.Address}
+                </p>
+                <br />
+              </>
+            )}
+
+            {UserDetails?.Skills.length !== 0 && (
+              <>
+                <p className="text-lg uppercase font-semibold my-5 text-[#151b29]">
+                  my skills
+                </p>
+                <ul className="skills">
+                  {UserDetails?.Skills.map((skill, index) => {
+                    return (
+                      <li key={index}>
+                        <span>{skill.Technology}</span>
+                      </li>
+                    );
+                  })}
+                </ul>
+                <br />
+              </>
+            )}
+
+            {UserDetails?.Education.length !== 0 && (
+              <>
+                <p className="text-lg uppercase font-semibold my-5 text-[#151b29]">
+                  Education
+                </p>
+                {UserDetails?.Education.map((edu, index) => {
+                  return (
+                    <>
+                      <p className="text-sm my-3">
+                        Qualification : {edu.Qualification} ({edu.YearRange}){" "}
+                        <br />
+                        Institution : {edu.Institution}
+                      </p>
+                    </>
+                  );
+                })}
+                <br />
+              </>
+            )}
           </div>
         </div>
 
-        <div className="px-[15px] w-full md:w-8/12">
+        <div className="px-[15px] w-full md:w-7/12">
           <div className="content-box">
             <p className="text-lg uppercase font-semibold my-5 text-[#151b29]">
-              profile
+              Carrier Objective
             </p>
             <p className="text-sm">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book.
-              <br />
-              Lorem Ipsum has been the industry's standard dummy text ever since
-              the 1500s.
+              {UserDetails && parse(UserDetails?.CarrierObjective)}
             </p>
             <br />
-            <p className="text-lg uppercase font-semibold my-5 text-[#151b29]">
-              EXPERIENCE
-            </p>
-            <p className="text-md uppercase font-normal text-[#151b29]">
-              UI DESIGNER IN LOREM IPSUM (2018 - NOW)
-            </p>
-            <p className="text-sm my-3">
-              Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting
-              Industry. Lorem Ipsum Has Been The Industry's Standard Dummy Text
-              Ever Since The 1500s, When An Unknown Printer Took A Galley Of
-              Type And Scrambled It To Make A Type Specimen Book.
-            </p>
-            <p className="text-md uppercase font-normal text-[#151b29]">
-              UI DESIGNER (2013 - 2015)
-            </p>
-            <p className="text-sm my-3">
-              Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting
-              Industry. Lorem Ipsum Has Been The Industry's Standard Dummy Text
-              Ever Since The 1500s
-            </p>
-            <p className="text-md uppercase font-normal text-[#151b29]">
-              GRAPIC DESIGNER(2010)
-            </p>
-            <p className="text-sm my-3">
-              Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting
-              Industry. Lorem Ipsum Has Been The Industry's Standard Dummy Text
-              Ever Since The 1500s, When An Unknown Printer Took A Galley Of
-              Type And Scrambled It To Make A Type Specimen Book.
-            </p>
-            <br />
-            <p className="text-lg uppercase font-semibold my-5 text-[#151b29]">
-              Education
-            </p>
-            <p className="text-sm my-3">HIGH SCHOOL OF CBSE (2009 - 2010)</p>
-            <p className="text-sm my-3">
-              BACHELOR OF COMPUTER APPLICATION (2013 - 2015)
-            </p>
-            <p className="text-sm my-3">
-              MASTER OF COMPUTER APPLICATION (2015 - 2018)
-            </p>
+
+            {UserDetails?.Experience.length !== 0 && (
+              <>
+                <p className="text-lg uppercase font-semibold my-5 text-[#151b29]">
+                  Employment Records:
+                </p>
+                {UserDetails?.Experience.map((skill, index) => {
+                  return (
+                    <>
+                      <a
+                        href={skill.Website}
+                        target="_black"
+                        className="text-purple-900"
+                      >
+                        {skill.Company}
+                      </a>
+                      <p className="text-sm my-3">Address: {skill.Place}</p>
+                      <p className="text-sm my-3">
+                        Year Range: {skill.YearRange}
+                      </p>
+                    </>
+                  );
+                })}
+                <br />
+              </>
+            )}
+
+            {UserDetails?.Projects.length !== 0 && (
+              <>
+                <p className="text-lg uppercase font-semibold my-5 text-[#151b29]">
+                  Project
+                </p>
+                {UserDetails?.Projects.map((project, index) => {
+                  return (
+                    <>
+                      <p className="text-md uppercase font-normal text-[#151b29]">
+                        {project.Title} ({project.YearRange}){" "}
+                        <a href={project.Link} target="_blank">
+                          <AiOutlineEye className="inline" />
+                        </a>
+                      </p>
+                      <p className="text-sm my-3">
+                        Description: {project.Description}
+                      </p>
+                      <p className="text-sm my-3">
+                        Year Range: {project.YearRange}
+                      </p>
+                    </>
+                  );
+                })}
+                <br />
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -184,10 +206,10 @@ const SingleTemplateOne = forwardRef((props, ref) => {
   );
 });
 
-const SingleTemplateTwo = forwardRef((props, ref) => {
+const SingleTemplateTwo = forwardRef(({ UserDetails }, ref) => {
   return (
     <div className="w-[800px] m-auto" ref={ref}>
-      <div className="flex mx-[-15px]  text-[#7b7b7b] bg-white">
+      <div className="flex mx-[-15px] text-[#7b7b7b] bg-white">
         <div className="px-[15px] w-full">
           <div className="p-5 text-center">
             <img
@@ -196,122 +218,147 @@ const SingleTemplateTwo = forwardRef((props, ref) => {
               alt="user"
             />
             <p className="text-[#151b29] text-[40px] mt-3">
-              MANOJ <span>ADHIKARI</span>
+              {UserDetails?.FullName}
             </p>
-            <p className="text-[#151b29] text-xl mt-2">UI / UX Designer</p>
+            <p className="text-[#151b29] text-xl mt-2">
+              {UserDetails?.Dejection}
+            </p>
           </div>
         </div>
       </div>
-      <div className="flex mx-[-15px] bg-[#151b29] text-[white]">
-        <div className="px-[15px] w-full md:w-4/12">
+      <div className="flex mx-[-15px]  bg-[#151b29] text-[white]">
+        <div className="px-[15px] w-full md:w-5/12">
           <div className="p-5">
-            <p className="text-lg uppercase font-semibold my-5 text-white">
+            <p className="text-lg uppercase font-semibold my-5 text-[white]">
               Contact
             </p>
-            <p>
-              <AiFillPhone className="inline" /> &nbsp;&nbsp;898392888
-            </p>
-            <p>
-              <BiEnvelope className="inline" /> &nbsp;&nbsp;dummymail.com
-            </p>
-            <p>
-              <AiOutlineHome className="inline" /> &nbsp;&nbsp;United Kingdom
-            </p>
-            <br />
-            <p className="text-lg uppercase font-semibold my-5 text-white">
-              my skills
-            </p>
-            <ul className="skills">
-              <li>
-                <span>Web Design</span>
-              </li>
-              <li>
-                <span>Grapic Design</span>
-              </li>
-              <li>
-                <span>HTML-5</span>
-              </li>
-              <li>
-                <span>CSS-3</span>
-              </li>
-              <li>
-                <span>Java Script</span>
-              </li>
-              <li>
-                <span>Jquery</span>
-              </li>
-            </ul>
-            <br />
-            <p className="text-lg uppercase font-semibold my-5 text-white">
-              awards
-            </p>
-            <p>CSS Design Awards</p>
-            <p>D&amp;AD Awards</p>
-            <p>CSS Winner Awards</p>
-            <p>The Shorty Awards</p>
-            <p>Awwwards</p>
-            <br />
-            <p className="head">Languages</p>
-            <p>Hindi</p>
-            <p>English</p>
+
+            {UserDetails?.Phone && (
+              <p>
+                <AiFillPhone className="inline" /> &nbsp;&nbsp;
+                {UserDetails?.Phone}
+              </p>
+            )}
+
+            {UserDetails?.Email && (
+              <p>
+                <BiEnvelope className="inline" /> &nbsp;&nbsp;
+                {UserDetails?.Email}
+              </p>
+            )}
+
+            {UserDetails?.Address && (
+              <>
+                <p>
+                  <AiOutlineHome className="inline" /> &nbsp;&nbsp;
+                  {UserDetails?.Address}
+                </p>
+                <br />
+              </>
+            )}
+
+            {UserDetails?.Skills.length !== 0 && (
+              <>
+                <p className="text-lg uppercase font-semibold my-5 text-[white]">
+                  my skills
+                </p>
+                <ul className="skills">
+                  {UserDetails?.Skills.map((skill, index) => {
+                    return (
+                      <li key={index}>
+                        <span>{skill.Technology}</span>
+                      </li>
+                    );
+                  })}
+                </ul>
+                <br />
+              </>
+            )}
+
+            {UserDetails?.Education.length !== 0 && (
+              <>
+                <p className="text-lg uppercase font-semibold my-5 text-[white]">
+                  Education
+                </p>
+                {UserDetails?.Education.map((edu, index) => {
+                  return (
+                    <>
+                      <p className="text-sm my-3">
+                        Qualification : {edu.Qualification} ({edu.YearRange}){" "}
+                        <br />
+                        Institution : {edu.Institution}
+                      </p>
+                    </>
+                  );
+                })}
+                <br />
+              </>
+            )}
           </div>
         </div>
 
-        <div className="px-[15px] w-full md:w-8/12">
+        <div className="px-[15px] w-full md:w-7/12">
           <div className="content-box">
-            <p className="text-lg uppercase font-semibold my-5 text-white">
-              profile
+            <p className="text-lg uppercase font-semibold my-5 text-[white]">
+              Carrier Objective
             </p>
             <p className="text-sm">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book.
-              <br />
-              Lorem Ipsum has been the industry's standard dummy text ever since
-              the 1500s.
+              {UserDetails && parse(UserDetails?.CarrierObjective)}
             </p>
             <br />
-            <p className="text-lg uppercase font-semibold my-5 text-white">
-              EXPERIENCE
-            </p>
-            <p className="text-md uppercase font-normal text-white">
-              UI DESIGNER IN LOREM IPSUM (2018 - NOW)
-            </p>
-            <p className="text-sm my-3">
-              Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting
-              Industry. Lorem Ipsum Has Been The Industry's Standard Dummy Text
-              Ever Since The 1500s, When An Unknown Printer Took A Galley Of
-              Type And Scrambled It To Make A Type Specimen Book.
-            </p>
-            <p className="text-md uppercase font-normal text-white">
-              UI DESIGNER (2013 - 2015)
-            </p>
-            <p className="text-sm my-3">
-              Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting
-              Industry. Lorem Ipsum Has Been The Industry's Standard Dummy Text
-              Ever Since The 1500s
-            </p>
-            <p className="text-md uppercase font-normal text-white">
-              GRAPIC DESIGNER(2010)
-            </p>
-            <p className="text-sm my-3">
-              Lorem Ipsum Is Simply Dummy Text Of The Printing And Typesetting
-              Industry. Lorem Ipsum Has Been The Industry's Standard Dummy Text
-              Ever Since The 1500s, When An Unknown Printer Took A Galley Of
-              Type And Scrambled It To Make A Type Specimen Book.
-            </p>
-            <br />
-            <p className="text-lg uppercase font-semibold my-5 text-white">
-              Education
-            </p>
-            <p className="text-sm my-3">HIGH SCHOOL OF CBSE (2009 - 2010)</p>
-            <p className="text-sm my-3">
-              BACHELOR OF COMPUTER APPLICATION (2013 - 2015)
-            </p>
-            <p className="text-sm my-3">
-              MASTER OF COMPUTER APPLICATION (2015 - 2018)
-            </p>
+
+            {UserDetails?.Experience.length !== 0 && (
+              <>
+                <p className="text-lg uppercase font-semibold my-5 text-[white]">
+                  Employment Records:
+                </p>
+                {UserDetails?.Experience.map((skill, index) => {
+                  return (
+                    <>
+                      <a
+                        href={skill.Website}
+                        target="_black"
+                        className="text-[#1c64f2]"
+                      >
+                        {skill.Company}
+                      </a>
+                      <p className="text-sm my-3">Address: {skill.Place}</p>
+                      <p className="text-sm my-3">
+                        Year Range: {skill.YearRange}
+                      </p>
+                    </>
+                  );
+                })}
+                <br />
+              </>
+            )}
+
+            {UserDetails?.Projects.length !== 0 && (
+              <>
+                <p className="text-lg uppercase font-semibold my-5 text-[white]">
+                  Project
+                </p>
+                {UserDetails?.Projects.map((project, index) => {
+                  return (
+                    <>
+                      <p className="text-md uppercase font-normal text-[white]">
+                        {project.Title} ({project.YearRange}){" "}
+                        <a href={project.Link} target="_blank">
+                          <AiOutlineEye className="inline" />
+                        </a>
+                      </p>
+                      <p className="text-sm my-3">
+                        Description: {project.Description}
+                      </p>
+                      <p className="text-sm my-3">
+                        Year Range: {project.YearRange}
+                      </p>
+                    </>
+                  );
+                })}
+                <br />
+              </>
+            )}
           </div>
         </div>
       </div>

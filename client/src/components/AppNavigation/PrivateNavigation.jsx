@@ -45,10 +45,10 @@ const PrivateNavigation = () => {
               </span>
             </Dropdown.Header>
             <Dropdown.Item>
-              <Link to="/dashboard">Dashboard</Link>
+              <Link to="/template">Template</Link>
             </Dropdown.Item>
             <Dropdown.Item>
-              <Link to="/template">Template</Link>
+              <Link to="/profile">Profile</Link>
             </Dropdown.Item>
             <Dropdown.Item>
               <Link to="/settings">Settings</Link>

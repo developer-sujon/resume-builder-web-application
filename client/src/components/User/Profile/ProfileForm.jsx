@@ -19,12 +19,7 @@ const validationSchema = Yup.object().shape({
       /(^(\+88|0088|88)?(01){1}[3456789]{1}(\d){8})$/,
       "Invalid Phone Number",
     ),
-  Email: Yup.string()
-    .required("Email is Required")
-    .matches(
-      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-      "Invalid Email address",
-    ),
+  Dejection: Yup.string().required("Dejection is Required"),
   Address: Yup.string().required("Address is Required"),
   CarrierObjective: Yup.string().required("Carrier Objective is Required"),
   Education: Yup.array().of(

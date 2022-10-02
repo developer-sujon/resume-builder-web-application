@@ -9,7 +9,6 @@ import SendOptPage from "../pages/AccountRecoveryPage/SendOptPage";
 import VerifyOptPage from "../pages/AccountRecoveryPage/VerifyOptPage";
 import LoginPage from "../pages/AuthPage/LoginPage";
 import RegistrationPage from "../pages/AuthPage/RegistrationPage";
-import DashboardPage from "../pages/DashboardPage/DashboardPage";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 import SingleTemplatePage from "../pages/TemplatePage/SingleTemplatePage";
 import TemplatePage from "../pages/TemplatePage/TemplatePage";
@@ -25,46 +24,34 @@ const AppRoutes = () => {
         <Route
           path="/"
           element={
-            accessToken ? (
-              <Navigate to="/dashboard" />
-            ) : (
-              <Navigate to="/login" />
-            )
+            accessToken ? <Navigate to="/template" /> : <Navigate to="/login" />
           }
         />
         <Route
           path="/login"
-          element={accessToken ? <Navigate to="/dashboard" /> : <LoginPage />}
+          element={accessToken ? <Navigate to="/template" /> : <LoginPage />}
         />
         <Route
           path="/register"
           element={
-            accessToken ? <Navigate to="/dashboard" /> : <RegistrationPage />
+            accessToken ? <Navigate to="/template" /> : <RegistrationPage />
           }
         />
         <Route
           path="/forgot-password"
-          element={accessToken ? <Navigate to="/dashboard" /> : <SendOptPage />}
+          element={accessToken ? <Navigate to="/template" /> : <SendOptPage />}
         />
         <Route
           path="/verify-otp"
           element={
-            accessToken ? <Navigate to="/dashboard" /> : <VerifyOptPage />
+            accessToken ? <Navigate to="/template" /> : <VerifyOptPage />
           }
         />
         <Route
           path="/reset-password"
           element={
-            accessToken ? (
-              <Navigate to="/dashboard" />
-            ) : (
-              <RecoveryPasswordPage />
-            )
+            accessToken ? <Navigate to="/template" /> : <RecoveryPasswordPage />
           }
-        />
-        <Route
-          path="/dashboard"
-          element={accessToken ? <DashboardPage /> : <Navigate to="/login" />}
         />
         <Route
           path="/template"

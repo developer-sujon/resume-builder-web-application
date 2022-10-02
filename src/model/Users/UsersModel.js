@@ -42,6 +42,10 @@ const UsersSchema = new Schema(
       type: String,
       default: "",
     },
+    Dejection: {
+      type: String,
+      default: "",
+    },
     Address: {
       type: String,
       default: "",

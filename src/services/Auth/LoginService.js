@@ -31,8 +31,6 @@ const LoginService = async (Request, DataModel) => {
     },
   ]);
 
-  console.log(userNotActive);
-
   if (userNotActive.length > 0) {
     throw CreateError("User Not Active", 401);
   }

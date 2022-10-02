@@ -4,8 +4,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 //Internal  lib import
-import FormValidation from "../helper/FormValidation";
-import UserRequest from "./UserRequest";
+import FormValidation from "../../helper/FormValidation";
+import UserRequest from "../../APIRequest/UserRequest";
 
 const SendOtp = () => {
   const navigate = useNavigate();
