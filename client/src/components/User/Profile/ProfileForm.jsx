@@ -2,57 +2,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Formik, Form } from "formik";
-import * as Yup from "yup";
 
 //Internal Import
-import PersonalInfo from "./PersonalInfo";
 import SkillsEducation from "./SkillsEducation";
 import ExperienceProjects from "./ExperienceProjects";
 import UserRequest from "../../../APIRequest/UserRequest";
-
-const validationSchema = Yup.object().shape({
-  FullName: Yup.string().required("Full Name is Required"),
-  UserName: Yup.string().required("User Name is Required"),
-  Phone: Yup.string()
-    .required("Mobile Number is Required")
-    .matches(
-      /(^(\+88|0088|88)?(01){1}[3456789]{1}(\d){8})$/,
-      "Invalid Phone Number",
-    ),
-  Dejection: Yup.string().required("Dejection is Required"),
-  Address: Yup.string().required("Address is Required"),
-  CarrierObjective: Yup.string().required("Carrier Objective is Required"),
-  Education: Yup.array().of(
-    Yup.object().shape({
-      Qualification: Yup.string().required("Qualification is Required"),
-      Percentage: Yup.string().required("Percentage is Required"),
-      Institution: Yup.string().required("Institution is Required"),
-      YearRange: Yup.string().required("YearRange is Required"),
-    }),
-  ),
-  Skills: Yup.array().of(
-    Yup.object().shape({
-      Technology: Yup.string().required("Technology is Required"),
-      Rating: Yup.string().required("Rating is Required"),
-    }),
-  ),
-  Experience: Yup.array().of(
-    Yup.object().shape({
-      Company: Yup.string().required("Company is Required"),
-      Website: Yup.string().required("Website is Required"),
-      Place: Yup.string().required("Place is Required"),
-      YearRange: Yup.string().required("Year Range is Required"),
-    }),
-  ),
-  Projects: Yup.array().of(
-    Yup.object().shape({
-      Title: Yup.string().required("Title is Required"),
-      Description: Yup.string().required("Description is Required"),
-      YearRange: Yup.string().required("Year Range is Required"),
-      Link: Yup.string().required("Link is Required"),
-    }),
-  ),
-});
+import Personal from "./Personal/Personal";
+import { validationSchema } from "./validationSchema";
 
 const ProfileForm = ({ category }) => {
   const { UserDetails } = useSelector((state) => state.User);
@@ -85,7 +41,7 @@ export default ProfileForm;
 
 const ViewProfileForm = ({ categoryName, values }) => {
   if (categoryName === "PersonalInfo") {
-    return <PersonalInfo {...values} />;
+    return <Personal {...values} />;
   }
   if (categoryName === "SkillsEducation") {
     return <SkillsEducation {...values} />;
