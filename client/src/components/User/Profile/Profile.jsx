@@ -28,13 +28,13 @@ const Profile = () => {
             <li class="mr-2">
               <button
                 className={`inline-block p-4 rounded-t-lg border-b-2 ${
-                  category === "SkillsEducation"
+                  category === "EducationTraining"
                     ? "text-blue-600 hover:text-blue-600 dark:text-blue-500 dark:hover:text-blue-500 border-blue-600 dark:border-blue-500"
                     : "border-transparent hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300 dark:border-transparent text-gray-500 dark:text-gray-400 border-gray-100 dark:border-gray-700"
                 }`}
-                onClick={() => setCategory("SkillsEducation")}
+                onClick={() => setCategory("EducationTraining")}
               >
-                Skills and Education
+                Education/Training
               </button>
             </li>
             <li>

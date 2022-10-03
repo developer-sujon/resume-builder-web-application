@@ -2,27 +2,92 @@
 import { AiOutlinePlus } from "react-icons/ai";
 import { Field } from "formik";
 import { useSelector } from "react-redux";
-import { countryList } from "../../../../helper/countryList";
+import {
+  countryList,
+  districtsLists,
+  unions,
+  upazilas,
+} from "../../../../helper/countryList";
 import { useState } from "react";
 
 //Inernal Import
-
 const AddressDetails = (props) => {
   const { UserDetails } = useSelector((state) => state.User);
-  const [insideBangladesh, setInideBangladesh] = useState(true);
+  const [insidePresentBangladesh, setinsidePresentBangladesh] = useState(true);
+  const [insidePermanentBangladesh, setinsidePermanentBangladesh] =
+    useState(true);
 
   return (
     <div className="flex flex-wrap mx-[-15px] my-5">
       <div className="px-[15px] w-full">
-        <MyInputField
-          name="Phone"
-          type="text"
+        <PresentAddress
+          name="PresentAddress"
           label="Present Address"
           placeholder="Present Address"
           require={true}
-          insideBangladesh={insideBangladesh}
-          setInideBangladesh={setInideBangladesh}
+          insidePresentBangladesh={insidePresentBangladesh}
+          setinsidePresentBangladesh={setinsidePresentBangladesh}
         />
+        <div className="flex flex-wrap mx-[-15px] my-5">
+          <div className="w-full px-[15px]">
+            <Field name="Road">
+              {({ field, form: { touched, errors }, meta }) => (
+                <>
+                  <input
+                    id="PresentAddressRoad"
+                    type="text"
+                    placeholder="Type your House No/Road/Village"
+                    {...field}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  />
+                  {meta.touched && meta.error && (
+                    <p
+                      id="filled_error_help"
+                      className="mt-2 text-md text-red-600 dark:text-red-400"
+                    >
+                      {meta.error}
+                    </p>
+                  )}
+                </>
+              )}
+            </Field>
+          </div>
+        </div>
+      </div>
+      <div className="px-[15px] w-full">
+        <PermanentAddress
+          name="PermanentAddress"
+          label="Permanent Address"
+          placeholder="Permanent Address"
+          require={true}
+          insidePermanentBangladesh={insidePermanentBangladesh}
+          setinsidePermanentBangladesh={setinsidePermanentBangladesh}
+        />
+        <div className="flex flex-wrap mx-[-15px] my-5">
+          <div className="w-full px-[15px]">
+            <Field name="Road">
+              {({ field, form: { touched, errors }, meta }) => (
+                <>
+                  <input
+                    id="PermanentAddress"
+                    type="text"
+                    placeholder="Type your House No/Road/Village"
+                    {...field}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  />
+                  {meta.touched && meta.error && (
+                    <p
+                      id="filled_error_help"
+                      className="mt-2 text-md text-red-600 dark:text-red-400"
+                    >
+                      {meta.error}
+                    </p>
+                  )}
+                </>
+              )}
+            </Field>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -30,14 +95,13 @@ const AddressDetails = (props) => {
 
 export default AddressDetails;
 
-const MyInputField = ({
+const PresentAddress = ({
   name,
-  type,
   label,
   placeholder,
   require,
-  insideBangladesh,
-  setInideBangladesh,
+  insidePresentBangladesh,
+  setinsidePresentBangladesh,
 }) => {
   return (
     <>
@@ -53,62 +117,217 @@ const MyInputField = ({
       <div className="flex mb-3">
         <div className="flex items-center mr-4">
           <input
-            id="InsideBangladesh"
+            id="insidePresentBangladesh"
             type="radio"
             defaultValue
-            name="inline-radio-group"
+            name="PresentAddressCountry"
             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-            onClick={() => setInideBangladesh(true)}
+            onClick={() => setinsidePresentBangladesh(true)}
+            defaultChecked={insidePresentBangladesh}
           />
           <label
-            htmlFor="InsideBangladesh"
+            htmlFor="insidePresentBangladesh"
             className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            onClick={() => setInideBangladesh(true)}
+            onClick={() => setinsidePresentBangladesh(true)}
           >
             Inside Bangladesh
           </label>
         </div>
         <div className="flex items-center mr-4">
           <input
-            id="OutsideBangladesh"
+            id="outsidePresentBangladesh"
             type="radio"
             defaultValue
-            name="inline-radio-group"
+            name="PresentAddressCountry"
             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-            onClick={() => setInideBangladesh(false)}
+            onClick={() => setinsidePresentBangladesh(false)}
           />
           <label
-            htmlFor="OutsideBangladesh"
+            htmlFor="outsidePresentBangladesh"
             className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            onClick={() => setInideBangladesh(false)}
+            onClick={() => setinsidePresentBangladesh(false)}
           >
             Outside Bangladesh
           </label>
         </div>
       </div>
-
-      {insideBangladesh ? (
-        <Field
-          id={name}
-          name={name}
-          as="select"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        >
-          {countryList.map((country) => (
-            <option value={country.name}>{country.name}</option>
-          ))}
-        </Field>
+      {insidePresentBangladesh ? (
+        <>
+          <div className="flex flex-wrap mx-[-15px] my-5">
+            <div className="w-full md:w-4/12 px-[15px]">
+              <Field
+                id="PresentAddressDistrict"
+                name="PresentAddress.District"
+                as="select"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              >
+                {districtsLists.map((district) => (
+                  <option value={district.name}>{district.name}</option>
+                ))}
+              </Field>
+            </div>
+            <div className="w-full md:w-4/12 px-[15px]">
+              <Field
+                id="PresentAddressUpazila"
+                name="PresentAddress.Upazila"
+                as="select"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              >
+                {upazilas.map((upazila) => (
+                  <option value={upazila.name}>{upazila.name}</option>
+                ))}
+              </Field>
+            </div>
+            <div className="w-full md:w-4/12 px-[15px]">
+              <Field
+                id="PresentAddressUnion"
+                name="PresentAddress.Union"
+                as="select"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              >
+                {unions.map((union) => (
+                  <option value={union.postOffice}>{union.postOffice}</option>
+                ))}
+              </Field>
+            </div>
+          </div>
+        </>
       ) : (
-        <Field
-          id={name}
-          name={name}
-          as="select"
-          className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-        >
-          {countryList.map((country) => (
-            <option value={country.name}>{country.name}3423424</option>
-          ))}
-        </Field>
+        <>
+          <div className="flex flex-wrap mx-[-15px] my-5">
+            <div className="w-full px-[15px]">
+              <Field
+                id="PresentAddressCountry"
+                name="Country"
+                as="select"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              >
+                {countryList.map((country) => (
+                  <option value={country.name}>{country.name}</option>
+                ))}
+              </Field>
+            </div>
+          </div>
+        </>
+      )}
+    </>
+  );
+};
+
+const PermanentAddress = ({
+  name,
+  label,
+  placeholder,
+  require,
+  insidePermanentBangladesh,
+  setinsidePermanentBangladesh,
+}) => {
+  return (
+    <>
+      <label
+        htmlFor={name}
+        className="inline-block my-2 md:my-0 md:mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      >
+        {label}
+      </label>
+
+      {require && <span className="text-red-600 ml-1">*</span>}
+
+      <div className="flex mb-3">
+        <div className="flex items-center mr-4">
+          <input
+            id="insidePermanentBangladesh"
+            type="radio"
+            defaultValue
+            name="PermanentAddressCountry"
+            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+            onClick={() => setinsidePermanentBangladesh(true)}
+            defaultChecked={insidePermanentBangladesh}
+          />
+          <label
+            htmlFor="insidePermanentBangladesh"
+            className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            onClick={() => setinsidePermanentBangladesh(true)}
+          >
+            Inside Bangladesh
+          </label>
+        </div>
+        <div className="flex items-center mr-4">
+          <input
+            id="outsidePermanentBangladesh"
+            type="radio"
+            defaultValue
+            name="PermanentAddressCountry"
+            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+            onClick={() => setinsidePermanentBangladesh(false)}
+          />
+          <label
+            htmlFor="outsidePermanentBangladesh"
+            className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            onClick={() => setinsidePermanentBangladesh(false)}
+          >
+            Outside Bangladesh
+          </label>
+        </div>
+      </div>
+      {insidePermanentBangladesh ? (
+        <>
+          <div className="flex flex-wrap mx-[-15px] my-5">
+            <div className="w-full md:w-4/12 px-[15px]">
+              <Field
+                id="PermanentAddressDistrict"
+                name="Permanent.District"
+                as="select"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              >
+                {districtsLists.map((district) => (
+                  <option value={district.name}>{district.name}</option>
+                ))}
+              </Field>
+            </div>
+            <div className="w-full md:w-4/12 px-[15px]">
+              <Field
+                id="PermanentAddressUpazila"
+                name="Permanent.Upazila"
+                as="select"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              >
+                {upazilas.map((upazila) => (
+                  <option value={upazila.name}>{upazila.name}</option>
+                ))}
+              </Field>
+            </div>
+            <div className="w-full md:w-4/12 px-[15px]">
+              <Field
+                id="PermanentAddressUnion"
+                name="Permanent.Union"
+                as="select"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              >
+                {unions.map((union) => (
+                  <option value={union.postOffice}>{union.postOffice}</option>
+                ))}
+              </Field>
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="flex flex-wrap mx-[-15px] my-5">
+            <div className="w-full px-[15px]">
+              <Field
+                id="PermanentAddressCountry"
+                name="Country"
+                as="select"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              >
+                {countryList.map((country) => (
+                  <option value={country.name}>{country.name}</option>
+                ))}
+              </Field>
+            </div>
+          </div>
+        </>
       )}
     </>
   );

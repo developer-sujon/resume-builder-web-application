@@ -132,7 +132,7 @@ const PersonalDetails = () => {
         </div>
         <div className="px-[15px] w-full md:w-6/12">
           <MyInputField
-            name="Passport Issue Date"
+            name="PassportIssueDate"
             type="date"
             label="Passport Issue Date"
             require={false}
