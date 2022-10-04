@@ -21,6 +21,7 @@ const UsersSchema = new Schema(
     },
     Gender: {
       type: String,
+      required: true,
     },
     Religion: {
       type: String,
