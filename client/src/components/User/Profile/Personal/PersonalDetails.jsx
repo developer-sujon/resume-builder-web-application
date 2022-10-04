@@ -154,26 +154,23 @@ const PersonalDetails = () => {
               form: { touched, errors, setFieldValue, values },
               meta,
             }) => (
-
-              (
-                <>
-                  <PhoneInput
-                    type="tel"
-                    placeholder="Enter phone number"
-                    name={field?.name}
-                    value={field?.value}
-                    onChange={(phone, country) => setFieldValue("Phone", phone)}
-                  />
-                  {meta.touched && meta.error && (
-                    <p
-                      id="filled_error_help"
-                      className="mt-2 text-md text-red-600 dark:text-red-400"
-                    >
-                      {meta.error}
-                    </p>
-                  )}
-                </>
-              )
+              <>
+                <PhoneInput
+                  type="tel"
+                  placeholder="Enter phone number"
+                  name={field?.name}
+                  value={field?.value}
+                  onChange={(phone, country) => setFieldValue("Phone", phone)}
+                />
+                {meta.touched && meta.error && (
+                  <p
+                    id="filled_error_help"
+                    className="mt-2 text-md text-red-600 dark:text-red-400"
+                  >
+                    {meta.error}
+                  </p>
+                )}
+              </>
             )}
           </Field>
         </div>
@@ -193,7 +190,7 @@ const PersonalDetails = () => {
                   name={field?.name}
                   value={field?.value}
                   onChange={(phone, country) =>
-                    setFieldValue({ SecondaryMobile: phone })
+                    setFieldValue("SecondaryMobile", phone)
                   }
                 />
                 {meta.touched && meta.error && (
@@ -378,8 +375,10 @@ const MySelectField = ({ name, label, require, options, PrimaryMobile }) => {
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         >
           {options.map((option, i) => (
-          <option value={option.name} key={i}>{option.name}</option>
-        ))}
+            <option value={option.name} key={i}>
+              {option.name}
+            </option>
+          ))}
         </Field>
       )}
     </>
