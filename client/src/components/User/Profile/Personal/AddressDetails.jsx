@@ -160,8 +160,10 @@ const PresentAddress = ({
                 as="select"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               >
-                {districtsLists.map((district) => (
-                  <option value={district.name}>{district.name}</option>
+                {districtsLists.map((district, i) => (
+                  <option value={district.name} key={i}>
+                    {district.name}
+                  </option>
                 ))}
               </Field>
             </div>
@@ -172,8 +174,10 @@ const PresentAddress = ({
                 as="select"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               >
-                {upazilas.map((upazila) => (
-                  <option value={upazila.name}>{upazila.name}</option>
+                {upazilas.map((upazila, i) => (
+                  <option value={upazila.name} key={i}>
+                    {upazila.name}
+                  </option>
                 ))}
               </Field>
             </div>
@@ -184,8 +188,10 @@ const PresentAddress = ({
                 as="select"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               >
-                {unions.map((union) => (
-                  <option value={union.postOffice}>{union.postOffice}</option>
+                {unions.map((union, i) => (
+                  <option value={union.postOffice} key={i}>
+                    {union.postOffice}
+                  </option>
                 ))}
               </Field>
             </div>
@@ -201,8 +207,10 @@ const PresentAddress = ({
                 as="select"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               >
-                {countryList.map((country) => (
-                  <option value={country.name}>{country.name}</option>
+                {countryList.map((country, i) => (
+                  <option value={country.name} key={i}>
+                    {country.name}
+                  </option>
                 ))}
               </Field>
             </div>
@@ -279,8 +287,10 @@ const PermanentAddress = ({
                 as="select"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               >
-                {districtsLists.map((district) => (
-                  <option value={district.name}>{district.name}</option>
+                {districtsLists.map((district, i) => (
+                  <option value={district.name} key={i}>
+                    {district.name}
+                  </option>
                 ))}
               </Field>
             </div>
@@ -291,8 +301,10 @@ const PermanentAddress = ({
                 as="select"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               >
-                {upazilas.map((upazila) => (
-                  <option value={upazila.name}>{upazila.name}</option>
+                {upazilas.map((upazila, i) => (
+                  <option value={upazila.name} key={i}>
+                    {upazila.name}
+                  </option>
                 ))}
               </Field>
             </div>
@@ -303,8 +315,10 @@ const PermanentAddress = ({
                 as="select"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               >
-                {unions.map((union) => (
-                  <option value={union.postOffice}>{union.postOffice}</option>
+                {unions.map((union, i) => (
+                  <option value={union.postOffice} key={i}>
+                    {union.postOffice}
+                  </option>
                 ))}
               </Field>
             </div>
@@ -320,8 +334,10 @@ const PermanentAddress = ({
                 as="select"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               >
-                {countryList.map((country) => (
-                  <option value={country.name}>{country.name}</option>
+                {countryList.map((country, i) => (
+                  <option value={country.name} key={i}>
+                    {country.name}
+                  </option>
                 ))}
               </Field>
             </div>

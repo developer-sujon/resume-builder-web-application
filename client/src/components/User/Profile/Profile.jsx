@@ -11,9 +11,9 @@ const Profile = () => {
     <section className="bg-white dark:bg-gray-900 min-h-screen">
       <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6">
         <h1 className=" text-xl dark:text-white">Update Profile</h1>
-        <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
-          <ul class="flex flex-wrap -mb-px text-sm font-medium text-center">
-            <li class="mr-2">
+        <div className="mb-4 border-b border-gray-200 dark:border-gray-700">
+          <ul className="flex flex-wrap -mb-px text-sm font-medium text-center">
+            <li className="mr-2">
               <button
                 className={`inline-block p-4 rounded-t-lg border-b-2 ${
                   category === "PersonalInfo"
@@ -25,7 +25,7 @@ const Profile = () => {
                 Personal Info
               </button>
             </li>
-            <li class="mr-2">
+            <li className="mr-2">
               <button
                 className={`inline-block p-4 rounded-t-lg border-b-2 ${
                   category === "EducationTraining"
