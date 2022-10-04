@@ -77,7 +77,7 @@ const AcademicSummary = (values) => {
                         name="ConcentrationMajorGroup"
                         type="text"
                         label="Concentration/ Major/Group"
-                        placeholder=""
+                        placeholder="Computer Science"
                         require={true}
                       />
                     </div>
@@ -199,13 +199,21 @@ const MyInputField = ({ index, name, type, label, placeholder, require }) => {
       >
         {label}
       </label>
+      {require && <span className="text-red-600 ml-1">*</span>}
       <Field
         id={`${name}`}
         type={type}
         name={`Educations.${index}.${name}`}
         placeholder={placeholder}
-        className='className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"'
+        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
       />
+
+      <p
+        id="filled_error_help"
+        className="mt-2 text-md text-red-600 dark:text-red-400"
+      >
+        <ErrorMessage name={`Educations.${index}.${name}`} />
+      </p>
     </>
   );
 };

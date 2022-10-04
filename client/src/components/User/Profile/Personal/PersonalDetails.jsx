@@ -149,24 +149,31 @@ const PersonalDetails = () => {
             Primary Mobile
           </label>
           <Field name="Phone">
-            {({ field, form: { touched, errors, setFieldValue }, meta }) => (
-              <>
-                <PhoneInput
-                  type="tel"
-                  placeholder="Enter phone number"
-                  name={field?.name}
-                  value={field?.value}
-                  onChange={(phone, country) => setFieldValue({ Phone: phone })}
-                />
-                {meta.touched && meta.error && (
-                  <p
-                    id="filled_error_help"
-                    className="mt-2 text-md text-red-600 dark:text-red-400"
-                  >
-                    {meta.error}
-                  </p>
-                )}
-              </>
+            {({
+              field,
+              form: { touched, errors, setFieldValue, values },
+              meta,
+            }) => (
+              console.log(values),
+              (
+                <>
+                  <PhoneInput
+                    type="tel"
+                    placeholder="Enter phone number"
+                    name={field?.name}
+                    value={field?.value}
+                    onChange={(phone, country) => setFieldValue("Phone", phone)}
+                  />
+                  {meta.touched && meta.error && (
+                    <p
+                      id="filled_error_help"
+                      className="mt-2 text-md text-red-600 dark:text-red-400"
+                    >
+                      {meta.error}
+                    </p>
+                  )}
+                </>
+              )
             )}
           </Field>
         </div>
@@ -219,7 +226,7 @@ const PersonalDetails = () => {
                   name={field?.name}
                   value={field?.value}
                   onChange={(phone, country) =>
-                    setFieldValue({ EmergencyContact: phone })
+                    setFieldValue("EmergencyContact", phone)
                   }
                 />
                 {meta.touched && meta.error && (

@@ -3,13 +3,66 @@ const { model, Schema } = require("mongoose");
 
 const UsersSchema = new Schema(
   {
-    FullName: {
+    FirstName: {
       type: String,
       required: true,
     },
-    UserName: {
+    LastName: {
+      type: String,
+    },
+    FatherName: {
+      type: String,
+    },
+    MotherName: {
+      type: String,
+    },
+    DateofBirth: {
+      type: String,
+    },
+    Gender: {
+      type: String,
+    },
+    Religion: {
+      type: String,
+    },
+    MaritalStatus: {
+      type: String,
+    },
+    Nationality: {
+      type: String,
+    },
+    NationalId: {
+      type: String,
+    },
+    Phone: {
       type: String,
       required: true,
+      validate: {
+        validator: function (v) {
+          return /(^(\+88|0088|88)?(01){1}[3456789]{1}(\d){8})$/.test(v);
+        },
+        message: (prop) => `Invalid Phone Number: ${prop.value}`,
+      },
+      unique: true,
+    },
+    SecondaryMobile: {
+      type: String,
+      validate: {
+        validator: function (v) {
+          return /(^(\+88|0088|88)?(01){1}[3456789]{1}(\d){8})$/.test(v);
+        },
+        message: (prop) => `Invalid Phone Number: ${prop.value}`,
+      },
+      unique: true,
+    },
+    EmergencyContact: {
+      type: String,
+      validate: {
+        validator: function (v) {
+          return /(^(\+88|0088|88)?(01){1}[3456789]{1}(\d){8})$/.test(v);
+        },
+        message: (prop) => `Invalid Phone Number: ${prop.value}`,
+      },
       unique: true,
     },
     Email: {
@@ -23,30 +76,41 @@ const UsersSchema = new Schema(
       },
       unique: true,
     },
-    Phone: {
+    AlternateEmail: {
       type: String,
-      required: true,
       validate: {
         validator: function (v) {
-          return /(^(\+88|0088|88)?(01){1}[3456789]{1}(\d){8})$/.test(v);
+          return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v);
         },
-        message: (prop) => `Invalid Phone Number: ${prop.value}`,
+        message: (prop) => `Invalid Email Address: ${prop.value}`,
       },
       unique: true,
     },
-    Password: {
+    BloodGroup: {
       type: String,
       required: true,
     },
-    Portfolio: {
+    HeightMeters: {
       type: String,
       default: "",
     },
-    Dejection: {
+    WeightKg: {
       type: String,
       default: "",
     },
-    Address: {
+    Country: {
+      type: String,
+      default: "",
+    },
+    PresentAddress: {
+      type: Object,
+      default: {},
+    },
+    PermanentAddress: {
+      type: Object,
+      default: {},
+    },
+    Road: {
       type: String,
       default: "",
     },
@@ -54,11 +118,23 @@ const UsersSchema = new Schema(
       type: String,
       default: "",
     },
-    Education: {
-      type: Array,
-      default: [],
+    PresentSalary: {
+      type: String,
+      default: "",
     },
-    Skills: {
+    ExpectedSalary: {
+      type: String,
+      default: "",
+    },
+    JobLevel: {
+      type: String,
+      default: "",
+    },
+    JobNature: {
+      type: String,
+      default: "",
+    },
+    PreferredAreas: {
       type: Array,
       default: [],
     },
@@ -66,9 +142,73 @@ const UsersSchema = new Schema(
       type: Array,
       default: [],
     },
-    Projects: {
+    PreferredJobLocationInsideBangladesh: {
       type: Array,
       default: [],
+    },
+    PreferredJobLocationOutsideBangladesh: {
+      type: Array,
+      default: [],
+    },
+    PreferredOrganization: {
+      type: Array,
+      default: [],
+    },
+    OtherRelevantInformation: {
+      type: Array,
+      default: [],
+    },
+    CareerSummary: {
+      type: String,
+      default: "",
+    },
+    SpecialQualification: {
+      type: String,
+      default: "",
+    },
+    Keywords: {
+      type: String,
+      default: "",
+    },
+    NationalDisability: {
+      type: String,
+      default: "",
+    },
+    Educations: {
+      type: Array,
+      default: [],
+    },
+    Trainings: {
+      type: Array,
+      default: [],
+    },
+    Professionals: {
+      type: Array,
+      default: [],
+    },
+    EmploymentHistorys: {
+      type: Array,
+      default: [],
+    },
+    EmploymentHistoryArmi: {
+      type: Array,
+      default: [],
+    },
+    Specialization: {
+      type: Array,
+      default: [],
+    },
+    LanguageProficiency: {
+      type: Array,
+      default: [],
+    },
+    References: {
+      type: Array,
+      default: [],
+    },
+    Password: {
+      type: String,
+      required: true,
     },
     Roles: {
       type: String,

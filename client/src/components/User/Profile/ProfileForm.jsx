@@ -3,58 +3,49 @@ import React from "react";
 import { Formik, Form } from "formik";
 
 //Internal Import
-import ExperienceProjects from "./ExperienceProjects";
 import UserRequest from "../../../APIRequest/UserRequest";
 import Personal from "./Personal/Personal";
 import EducationTraining from "./EducationTraining/EducationTraining";
 import { validationSchema } from "./validationSchema";
+import Employment from "./Employment/Employment";
+import OtherInformation from "./OtherInformation/OtherInformation";
+import Photograph from "./Photograph/Photograph";
+import { useSelector } from "react-redux";
 
 const ProfileForm = ({ category }) => {
-  // const { UserDetails } = useSelector((state) => state.User);
+  const { UserDetails } = useSelector((state) => state.User);
 
-  const UserDetails = {
-    FirstName: "Mohammd",
-    LastName: "Sujon",
-    FatherName: "Md Babu",
-    MotherName: "Mst Ambia Khatun",
-    DateofBirth: "fsfsfd",
-    Gender: "Female",
-    Religion: "Islam",
-    MaritalStatus: "Single",
-    Nationality: "Bangladesh",
-    NationalId: "920389ssd",
-    PassportNumber: "234234234dsfsdfs34234",
-    PassportIssueDate: "fsfsfd",
+  const a = {
+    FirstName: "",
+    LastName: "",
+    FatherName: "",
+    MotherName: "",
+    DateofBirth: "",
+    Gender: "",
+    Religion: "",
+    MaritalStatus: "",
+    Nationality: "",
+    NationalId: "",
+    PassportNumber: "",
+    PassportIssueDate: "",
     Phone: "+8801772703036",
-    SecondaryMobile: "+8801772703036",
-    EmergencyContact: "+8801772703036",
-    Email: "devoloper.sujon@gmail.com",
-    AlternateEmail: "devoloper.sujon@gmail.com",
-    BloodGroup: "devoloper.sujon@gmail.com",
-    HeightMeters: "5.8",
-    WeightKg: "57",
-    Country: "Bangladesh",
-    PresentAddress: {
-      District: "Dhaka",
-      Upazila: "Companiganj",
-      Union: "Amjhupi",
-    },
-    PermanentAddress: {
-      District: "Dhaka",
-      Upazila: "Companiganj",
-      Union: "Amjhupi",
-    },
-    Road: "fsfsfd",
-    CarrierObjective: "sdfklsdfjkskakfjskjldfkljsldkjf",
-    PresentSalary: "25000",
-    ExpectedSalary: "35000",
-    JobLevel: "Mid Level",
-    JobNature: "Full time",
-    PreferredAreas: [
-      "AccountingFinance",
-      "MedicalPharma",
-      "স্যুইংমেশিনঅপারেটর",
-    ],
+    SecondaryMobile: "",
+    EmergencyContact: "",
+    Email: "",
+    AlternateEmail: "",
+    BloodGroup: "",
+    HeightMeters: "",
+    WeightKg: "",
+    Country: "",
+    PresentAddress: {},
+    PermanentAddress: {},
+    Road: "",
+    CarrierObjective: "",
+    PresentSalary: "",
+    ExpectedSalary: "",
+    JobLevel: "",
+    JobNature: "",
+    PreferredAreas: [],
     PreferredJobLocationInsideBangladesh: [],
     PreferredJobLocationOutsideBangladesh: [],
     PreferredOrganization: [],
@@ -64,8 +55,14 @@ const ProfileForm = ({ category }) => {
     Keywords: "",
     NationalDisability: "",
     Educations: [],
-    Training: [],
+    Trainings: [],
     Professionals: [],
+    EmploymentHistorys: [],
+    EmploymentHistoryArmi: {},
+    Specialization: [],
+    LanguageProficiency: [],
+    References: [],
+    Image: "",
   };
 
   return (
@@ -74,6 +71,7 @@ const ProfileForm = ({ category }) => {
       initialValues={UserDetails}
       validationSchema={validationSchema}
       onSubmit={(values) => {
+        console.log(values);
         UserRequest.UserUpdate(values);
       }}
       render={({ values }) => (
@@ -101,7 +99,13 @@ const ViewProfileForm = ({ categoryName, values }) => {
   if (categoryName === "EducationTraining") {
     return <EducationTraining {...values} />;
   }
-  if (categoryName === "ExperienceProjects") {
-    return <ExperienceProjects {...values} />;
+  if (categoryName === "Employment") {
+    return <Employment {...values} />;
+  }
+  if (categoryName === "OtherInformation") {
+    return <OtherInformation {...values} />;
+  }
+  if (categoryName === "Photograph") {
+    return <Photograph {...values} />;
   }
 };

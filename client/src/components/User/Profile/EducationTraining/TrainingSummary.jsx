@@ -1,5 +1,5 @@
 //External Import
-import { Field, FieldArray} from "formik";
+import { ErrorMessage, Field, FieldArray } from "formik";
 import { IoIosRemoveCircleOutline } from "react-icons/io";
 import { AiOutlinePlus } from "react-icons/ai";
 
@@ -7,7 +7,7 @@ const TrainingSummary = (values) => {
   return (
     <>
       <FieldArray
-        name="Training"
+        name="Trainings"
         render={(arrayHelpers) => (
           <div>
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white mt-5">
@@ -28,15 +28,15 @@ const TrainingSummary = (values) => {
                 />
               </button>
             </h1>
-            {values.Training &&
-              values.Training.length > 0 &&
-              values.Training.map((skill, index) => (
+            {values.Trainings &&
+              values.Trainings.length > 0 &&
+              values.Trainings.map((skill, index) => (
                 <div className="py-10 border-b-4 border-blue-500">
                   <div className="flex flex-wrap mx-[-15px] mb-3">
                     <div className="px-[15px] w-full md:w-6/12">
                       <MyInputField
                         index={index}
-                        name="TrainingTitle"
+                        name="Title"
                         type="text"
                         label="Training Title"
                         placeholder=""
@@ -58,11 +58,11 @@ const TrainingSummary = (values) => {
                     <div className="px-[15px] w-full md:w-6/12">
                       <MyInputField
                         index={index}
-                        name="TopicsCovered"
+                        name="Covered"
                         type="text"
                         label="Topics Covered"
                         placeholder=""
-                        require={true}
+                        require={false}
                       />
                     </div>
                     <div className="px-[15px] w-full md:w-6/12">
@@ -110,7 +110,7 @@ const TrainingSummary = (values) => {
                         type="text"
                         label="Location"
                         placeholder=""
-                        require={true}
+                        require={false}
                       />
                     </div>
                   </div>
@@ -147,8 +147,14 @@ const MyInputField = ({ index, name, type, label, placeholder, require }) => {
         type={type}
         name={`Trainings.${index}.${name}`}
         placeholder={placeholder}
-        className='className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"'
+        className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
       />
+      <p
+        id="filled_error_help"
+        className="mt-2 text-md text-red-600 dark:text-red-400"
+      >
+        <ErrorMessage name={`Trainings.${index}.${name}`} />
+      </p>
     </>
   );
 };

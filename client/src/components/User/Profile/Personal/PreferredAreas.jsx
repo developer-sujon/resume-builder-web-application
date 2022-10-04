@@ -1,5 +1,5 @@
 //External Import
-import { Field } from "formik";
+import { ErrorMessage, Field } from "formik";
 import "react-quill/dist/quill.snow.css";
 import Select from "react-select";
 import {
@@ -81,6 +81,13 @@ const PreferredAreas = () => {
               label="Medical/Pharma"
             />
           </div>
+
+          <p
+            id="filled_error_help"
+            class="mt-2 text-md text-red-600 dark:text-red-400"
+          >
+            <ErrorMessage name="PreferredAreas" />
+          </p>
         </div>
         <div className="px-[15px] w-full md:w-6/12">
           <i>Special Skills (max 3)</i>
@@ -125,8 +132,8 @@ const PreferredAreas = () => {
               <Select
                 closeMenuOnSelect={false}
                 defaultValue={[
-                  values.PreferredJobLocationInsideBangladesh[0],
-                  values.PreferredJobLocationInsideBangladesh[1],
+                  values?.PreferredJobLocationInsideBangladesh[0],
+                  values?.PreferredJobLocationInsideBangladesh[1],
                 ]}
                 isMulti
                 name="colors"
@@ -139,6 +146,12 @@ const PreferredAreas = () => {
               />
             )}
           </Field>
+          <p
+            id="filled_error_help"
+            class="mt-2 text-md text-red-600 dark:text-red-400"
+          >
+            <ErrorMessage name="PreferredJobLocationInsideBangladesh" />
+          </p>
         </div>
 
         <div className="px-[15px] w-full md:w-6/12">
@@ -152,8 +165,8 @@ const PreferredAreas = () => {
               <Select
                 closeMenuOnSelect={false}
                 defaultValue={[
-                  values.PreferredJobLocationOutsideBangladesh[0],
-                  values.PreferredJobLocationOutsideBangladesh[1],
+                  values?.PreferredJobLocationOutsideBangladesh[0],
+                  values?.PreferredJobLocationOutsideBangladesh[1],
                 ]}
                 isMulti
                 name="colors"
@@ -166,6 +179,12 @@ const PreferredAreas = () => {
               />
             )}
           </Field>
+          <p
+            id="filled_error_help"
+            class="mt-2 text-md text-red-600 dark:text-red-400"
+          >
+            <ErrorMessage name="PreferredJobLocationOutsideBangladesh" />
+          </p>
         </div>
       </div>
 
@@ -181,8 +200,8 @@ const PreferredAreas = () => {
               <Select
                 closeMenuOnSelect={false}
                 defaultValue={[
-                  values.PreferredOrganization[0],
-                  values.PreferredOrganization[1],
+                  values?.PreferredOrganization[0],
+                  values?.PreferredOrganization[1],
                 ]}
                 isMulti
                 name="colors"
@@ -195,6 +214,12 @@ const PreferredAreas = () => {
               />
             )}
           </Field>
+          <p
+            id="filled_error_help"
+            class="mt-2 text-md text-red-600 dark:text-red-400"
+          >
+            <ErrorMessage name="PreferredOrganization" />
+          </p>
         </div>
       </div>
     </>
