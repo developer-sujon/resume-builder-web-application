@@ -1,21 +1,18 @@
 //External Import
-import { Field, Form, Formik, FormikProps } from "formik";
+import { ErrorMessage, Field, Form, Formik, FormikProps } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
-
-//Internal Import
-import FormValidation from "../../helper/FormValidation";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
 import AuthRequest from "../../APIRequest/AuthRequest";
 
+//Internal Import
 const validationSchema = Yup.object().shape({
   FirstName: Yup.string().required("First Name is Required"),
   LastName: Yup.string().required("Last Name is Required"),
-  Phone: Yup.string()
-    .required("Mobile Number is Required")
-    .matches(
-      /(^(\+88|0088|88)?(01){1}[3456789]{1}(\d){8})$/,
-      "Invalid Phone Number",
-    ),
+  Gender: Yup.string().required("Gender is Required"),
+  PreferredAreas: Yup.string().required("Preferred Areas is Required"),
+  Phone: Yup.string().required("Mobile Number is Required"),
   Email: Yup.string()
     .required("Email is Required")
     .matches(
@@ -46,18 +43,20 @@ const RegisterUser = () => {
               initialValues={{
                 FirstName: "",
                 LastName: "",
+                Gender: "",
+                PreferredAreas: "",
                 Phone: "",
                 Email: "",
                 Password: "",
                 ConfirmPassword: "",
-                Gender: "Other",
               }}
               validationSchema={validationSchema}
               onSubmit={(values, actions) => {
-                setTimeout(() => {
-                  alert(JSON.stringify(values, null, 2));
-                  actions.setSubmitting(false);
-                }, 1000);
+                AuthRequest.RegisterUser(values).then((result) => {
+                  if (result) {
+                    navigate("/login");
+                  }
+                });
               }}
             >
               {(props: FormikProps<any>) => (
@@ -69,6 +68,7 @@ const RegisterUser = () => {
                         label="First Name"
                         type="text"
                         placeholder="Mohammad"
+                        require={true}
                       />
                     </div>
                     <div className="px-[15px] w-full md:w-[50%]">
@@ -77,6 +77,7 @@ const RegisterUser = () => {
                         label="Last Name"
                         type="text"
                         placeholder="Salman"
+                        require={true}
                       />
                     </div>
                   </div>
@@ -89,29 +90,147 @@ const RegisterUser = () => {
                       </label>
                       <div className="flex items-center mr-4">
                         <label>
-                          <Field type="radio" name="Gender" value="Male" /> Male
+                          <Field
+                            type="radio"
+                            name="Gender"
+                            value="Male"
+                            className="mx-1"
+                          />
+                          Male
                         </label>
                         <label>
-                          <Field type="radio" name="Gender" value="Frmale" />
+                          <Field
+                            type="radio"
+                            name="Gender"
+                            value="Frmale"
+                            className="mx-1"
+                          />
                           Frmale
                         </label>
                         <label>
-                          <Field type="radio" name="Gender" value="Other" />
+                          <Field
+                            type="radio"
+                            name="Gender"
+                            value="Other"
+                            className="mx-1"
+                          />
                           Other
                         </label>
                       </div>
+                      <p
+                        id="filled_error_help"
+                        className="mt-2 text-md text-red-600 dark:text-red-400"
+                      >
+                        <ErrorMessage name="Gender" />
+                      </p>
                     </div>
                     <div className="px-[15px] w-full md:w-[50%]">
-                      <MyInput
-                        name="LastName"
-                        label="Mobile Number"
-                        type="text"
-                        placeholder="Mobile Number"
+                      <MySelectField
+                        name="PreferredAreas"
+                        label="Select your skill from following list"
+                        require={true}
+                        options={[
+                          {
+                            label: "Accounting/Finance",
+                            value: "AccountingFinance",
+                          },
+                          {
+                            label: "Bank/Non-Bank Fin. Institution",
+                            value: "BankNonBankFinInstitution",
+                          },
+                          {
+                            label: "Commercial/Supply Chain",
+                            value: "CommercialSupplyChain",
+                          },
+                          {
+                            label: "Education/Training",
+                            value: "EducationTraining",
+                          },
+                          {
+                            label: "Engineer/Architect",
+                            value: "EngineerArchitect",
+                          },
+                          {
+                            label: "Garments/ Textile",
+                            value: "GarmentsTextile",
+                          },
+                        ]}
                       />
                     </div>
                   </div>
 
-                  <button type="submit">Submit</button>
+                  <div className="flex flex-wrap mx-[-15px]  my-3">
+                    <div className="px-[15px] w-full md:w-[50%]">
+                      <label className="mb-2 block">
+                        Mobile
+                        <span className="text-red-600 ml-1">*</span>
+                      </label>
+                      <Field name="Phone">
+                        {({
+                          field,
+                          form: { touched, errors, setFieldValue, values },
+                          meta,
+                        }) => (
+                          <>
+                            <PhoneInput
+                              type="tel"
+                              placeholder="Enter phone number"
+                              name={field?.name}
+                              value={field?.value}
+                              onChange={(phone, country) =>
+                                setFieldValue("Phone", phone)
+                              }
+                            />
+                            {meta.touched && meta.error && (
+                              <p
+                                id="filled_error_help"
+                                className="mt-2 text-md text-red-600 dark:text-red-400"
+                              >
+                                {meta.error}
+                              </p>
+                            )}
+                          </>
+                        )}
+                      </Field>
+                    </div>
+                    <div className="px-[15px] w-full md:w-[50%]">
+                      <MyInput
+                        name="Email"
+                        label="Email Address"
+                        type="email"
+                        placeholder="Email Address"
+                        require={true}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap mx-[-15px] my-3">
+                    <div className="px-[15px] w-full md:w-[50%]">
+                      <MyInput
+                        name="Password"
+                        label="Password"
+                        type="password"
+                        placeholder="******"
+                        require={true}
+                      />
+                    </div>
+                    <div className="px-[15px] w-full md:w-[50%]">
+                      <MyInput
+                        name="ConfirmPassword"
+                        label="Confirm Password"
+                        type="password"
+                        placeholder="....."
+                        require={true}
+                      />
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  >
+                    Sign Up
+                  </button>
                 </Form>
               )}
             </Formik>
@@ -132,21 +251,56 @@ const MyInput = ({ name, label, type, placeholder }) => {
           <>
             <label
               htmlFor={name}
-              className="block my-2 md:my-0 md:mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className=" my-2 md:my-0 md:mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
               {label}
             </label>
+            {require && <span className="text-red-600 ml-1">*</span>}
             <input
               type={type}
+              id={name}
               placeholder={placeholder}
               {...field}
               className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
             {meta.touched && meta.error && (
-              <div className="error">{meta.error}</div>
+              <p
+                id="filled_error_help"
+                className="mt-2 text-md text-red-600 dark:text-red-400"
+              >
+                {meta.error}
+              </p>
             )}
           </>
         )}
+      </Field>
+    </>
+  );
+};
+
+const MySelectField = ({ name, label, require, options }) => {
+  return (
+    <>
+      <label
+        htmlFor="PreferredAreas"
+        className="inline-block my-3 md:my-0 md:mb-2 text-sm font-medium text-gray-900 dark:text-white "
+      >
+        {label}
+      </label>
+
+      {require && <span className="text-red-600 ml-1">*</span>}
+
+      <Field
+        id="PreferredAreas"
+        name="PreferredAreas"
+        as="select"
+        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      >
+        {options.map((option, i) => (
+          <option value={option.value} key={i}>
+            {option.label}
+          </option>
+        ))}
       </Field>
     </>
   );

@@ -10,12 +10,16 @@ import AuthRequest from "../../APIRequest/AuthRequest";
 const LoginUser = () => {
   const formik = useFormik({
     initialValues: {
-      UserName: "",
+      Email: "",
       Password: "",
     },
-
     validationSchema: Yup.object({
-      UserName: Yup.string().required("User Name is Required"),
+      Email: Yup.string()
+        .required("Email is Required")
+        .matches(
+          /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+          "Invalid Email address",
+        ),
       Password: Yup.string().required("Password is Required"),
     }),
 
@@ -38,25 +42,25 @@ const LoginUser = () => {
             >
               <div>
                 <label
-                  htmlFor="UserName"
+                  htmlFor="Email"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  User Name
+                  Email
                 </label>
                 <input
                   type="text"
-                  name="UserName"
-                  id="UserName"
+                  name="Email"
+                  id="Email"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="salman12"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
-                  value={formik.values.UserName}
+                  value={formik.values.Email}
                 />
 
-                {formik.touched.UserName &&
-                  formik.errors.UserName &&
-                  FormValidation.isError(formik.errors.UserName)}
+                {formik.touched.Email &&
+                  formik.errors.Email &&
+                  FormValidation.isError(formik.errors.Email)}
               </div>
               <div>
                 <label

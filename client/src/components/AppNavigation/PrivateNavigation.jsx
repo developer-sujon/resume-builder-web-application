@@ -38,7 +38,7 @@ const PrivateNavigation = () => {
           >
             <Dropdown.Header>
               <span className="block text-sm">
-                {UserDetails && UserDetails.FullName}
+                {UserDetails && UserDetails.FirstName} {UserDetails && UserDetails.LastName}
               </span>
               <span className="block truncate text-sm font-medium">
                 {UserDetails && UserDetails.Email}

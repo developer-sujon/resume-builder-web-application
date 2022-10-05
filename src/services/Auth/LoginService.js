@@ -6,12 +6,12 @@ const CreateToken = require("../../utility/CreateToken");
 const { CreateError } = require("../../helper/ErrorHandler");
 
 const LoginService = async (Request, DataModel) => {
-  const { UserName, Password } = Request.body;
+  const { Email, Password } = Request.body;
 
-  if (!UserName || !Password) {
+  if (!Email || !Password) {
     throw CreateError("Invalid Data", 400);
   }
-  const User = await DataModel.aggregate([{ $match: { UserName: UserName } }]);
+  const User = await DataModel.aggregate([{ $match: { Email: Email } }]);
 
   if (!User.length > 0) {
     throw CreateError("User Not found", 404);
@@ -25,7 +25,7 @@ const LoginService = async (Request, DataModel) => {
   const userNotActive = await DataModel.aggregate([
     {
       $match: {
-        UserName: UserName,
+        Email: Email,
         AccountStatus: "PENDING",
       },
     },
@@ -38,7 +38,7 @@ const LoginService = async (Request, DataModel) => {
   const userBlock = await DataModel.aggregate([
     {
       $match: {
-        UserName: UserName,
+        Email: Email,
         AccountStatus: "REJECTED",
       },
     },
@@ -51,7 +51,7 @@ const LoginService = async (Request, DataModel) => {
   const payLoad = {
     id: User[0]._id,
     Roles: User[0].Roles,
-    UserName: User[0].UserName,
+    Email: User[0].Email,
   };
 
   const token = await CreateToken(payLoad);

@@ -5,24 +5,42 @@ const bcrypt = require("bcrypt");
 const { CreateError } = require("../../helper/ErrorHandler");
 
 const RegistrationService = async (Request, UsersModel) => {
-  const { FullName, UserName, Phone, Email, Password } = Request.body;
+  const {
+    FirstName,
+    LastName,
+    Gender,
+    PreferredAreas,
+    Phone,
+    Email,
+    Password,
+  } = Request.body;
 
   const newUser = new UsersModel({
-    FullName: FullName,
-    UserName: UserName,
+    FirstName: FirstName,
+    LastName: LastName,
+    Gender: Gender,
+    PreferredAreas: PreferredAreas,
     Phone: Phone,
     Email: Email,
     Password: Password,
   });
 
-  if (!FullName || !UserName || !Phone || !Email || !Password) {
+  if (
+    !FirstName ||
+    !LastName ||
+    !Phone ||
+    !Gender ||
+    !PreferredAreas ||
+    !Email ||
+    !Password
+  ) {
     throw CreateError("Invalid Data", 400);
   }
 
   const exitUser = await UsersModel.aggregate([
     {
       $match: {
-        $or: [{ Email: Email }, { Phone: Phone }, { UserName: UserName }],
+        $or: [{ Email: Email }, { Phone: Phone }],
       },
     },
   ]);
