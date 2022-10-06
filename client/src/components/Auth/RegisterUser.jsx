@@ -12,7 +12,6 @@ const validationSchema = Yup.object().shape({
   LastName: Yup.string().required("Last Name is Required"),
   Gender: Yup.string().required("Gender is Required"),
   PreferredAreas: Yup.string().required("Preferred Areas is Required"),
-  Phone: Yup.string().required("Mobile Number is Required"),
   Email: Yup.string()
     .required("Email is Required")
     .matches(

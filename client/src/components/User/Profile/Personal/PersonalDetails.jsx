@@ -245,6 +245,7 @@ const PersonalDetails = () => {
             label="Primary Email"
             placeholder="Primary Email"
             require={false}
+            disabled={true}
           />
         </div>
       </div>
@@ -303,7 +304,14 @@ const PersonalDetails = () => {
 
 export default PersonalDetails;
 
-const MyInputField = ({ name, type, label, placeholder, require }) => {
+const MyInputField = ({
+  name,
+  type,
+  label,
+  placeholder,
+  require,
+  disabled,
+}) => {
   return (
     <>
       <label
@@ -319,6 +327,7 @@ const MyInputField = ({ name, type, label, placeholder, require }) => {
         {({ field, form: { touched, errors }, meta }) => (
           <>
             <input
+              disabled={disabled}
               min="1"
               id={name}
               name={name}

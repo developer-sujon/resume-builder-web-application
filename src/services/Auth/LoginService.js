@@ -13,6 +13,7 @@ const LoginService = async (Request, DataModel) => {
   }
   const User = await DataModel.aggregate([{ $match: { Email: Email } }]);
 
+
   if (!User.length > 0) {
     throw CreateError("User Not found", 404);
   }

@@ -36,6 +36,12 @@ const UsersSchema = new Schema(
     NationalId: {
       type: String,
     },
+    PassportNumber: {
+      type: String,
+    },
+    PassportIssueDate: {
+      type: String,
+    },
     Phone: {
       type: String,
       required: true,
@@ -98,10 +104,6 @@ const UsersSchema = new Schema(
     PermanentAddress: {
       type: Object,
       default: {},
-    },
-    Road: {
-      type: String,
-      default: "",
     },
     CarrierObjective: {
       type: String,

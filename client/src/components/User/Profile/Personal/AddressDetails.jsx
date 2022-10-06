@@ -29,11 +29,11 @@ const AddressDetails = (props) => {
         />
         <div className="flex flex-wrap mx-[-15px] my-5">
           <div className="w-full px-[15px]">
-            <Field name="Road">
+            <Field name="PresentAddress.Road">
               {({ field, form: { touched, errors }, meta }) => (
                 <>
                   <input
-                    id="PresentAddressRoad"
+                    id="PresentAddress.Road"
                     type="text"
                     placeholder="Type your House No/Road/Village"
                     {...field}
@@ -64,11 +64,11 @@ const AddressDetails = (props) => {
         />
         <div className="flex flex-wrap mx-[-15px] my-5">
           <div className="w-full px-[15px]">
-            <Field name="Road">
+            <Field name="PermanentAddress.Road">
               {({ field, form: { touched, errors }, meta }) => (
                 <>
                   <input
-                    id="PermanentAddress"
+                    id="PermanentAddress.Road"
                     type="text"
                     placeholder="Type your House No/Road/Village"
                     {...field}
@@ -283,7 +283,7 @@ const PermanentAddress = ({
             <div className="w-full md:w-4/12 px-[15px]">
               <Field
                 id="PermanentAddressDistrict"
-                name="Permanent.District"
+                name="PermanentAddress.District"
                 as="select"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               >
@@ -297,7 +297,7 @@ const PermanentAddress = ({
             <div className="w-full md:w-4/12 px-[15px]">
               <Field
                 id="PermanentAddressUpazila"
-                name="Permanent.Upazila"
+                name="PermanentAddress.Upazila"
                 as="select"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               >
@@ -311,7 +311,7 @@ const PermanentAddress = ({
             <div className="w-full md:w-4/12 px-[15px]">
               <Field
                 id="PermanentAddressUnion"
-                name="Permanent.Union"
+                name="PermanentAddress.Union"
                 as="select"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               >
