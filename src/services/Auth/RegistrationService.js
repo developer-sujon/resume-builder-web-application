@@ -28,13 +28,12 @@ const RegistrationService = async (Request, UsersModel) => {
   if (
     !FirstName ||
     !LastName ||
-    !Phone ||
     !Gender ||
     !PreferredAreas ||
     !Email ||
     !Password
   ) {
-    throw CreateError("Invalid Data", 400);
+    throw CreateError("All Field Require", 400);
   }
 
   const exitUser = await UsersModel.aggregate([

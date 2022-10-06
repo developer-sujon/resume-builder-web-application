@@ -49,17 +49,11 @@ const UsersSchema = new Schema(
     },
     SecondaryMobile: {
       type: String,
-      unique: true,
+      default: "",
     },
     EmergencyContact: {
       type: String,
-      validate: {
-        validator: function (v) {
-          return /(^(\+88|0088|88)?(01){1}[3456789]{1}(\d){8})$/.test(v);
-        },
-        message: (prop) => `Invalid Phone Number: ${prop.value}`,
-      },
-      unique: true,
+      default: "",
     },
     Email: {
       type: String,
@@ -74,13 +68,7 @@ const UsersSchema = new Schema(
     },
     AlternateEmail: {
       type: String,
-      validate: {
-        validator: function (v) {
-          return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(v);
-        },
-        message: (prop) => `Invalid Email Address: ${prop.value}`,
-      },
-      unique: true,
+      default: "",
     },
     BloodGroup: {
       type: String,

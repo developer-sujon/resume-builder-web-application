@@ -623,7 +623,7 @@ const SingleTemplateOne = forwardRef(({ UserDetails }, ref) => {
                           </td>
                           <td width="66%" align="left">
                             {UserDetails?.PreferredOrganization?.map((pre) => {
-                              return pre + ", ";
+                              return pre?.label + ", ";
                             })}
                           </td>
                         </tr>
@@ -1018,10 +1018,14 @@ const SingleTemplateTwo = forwardRef(({ UserDetails }, ref) => {
         color: "#fff",
       }}
     >
-      <div className="w-[800px] m-auto py-10" ref={ref} style={{
-        backgroundColor: "#121241",
-        color: "#fff",
-      }}>
+      <div
+        className="w-[800px] m-auto py-10"
+        ref={ref}
+        style={{
+          backgroundColor: "#121241",
+          color: "#fff",
+        }}
+      >
         <div className="w-[800px] m-auto">
           <div
             className="text-sm"

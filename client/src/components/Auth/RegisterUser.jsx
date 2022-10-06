@@ -18,6 +18,7 @@ const validationSchema = Yup.object().shape({
       /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
       "Invalid Email address",
     ),
+
   Password: Yup.string().required("Password is Required"),
   ConfirmPassword: Yup.string()
     .required("Confirm Password is required")
@@ -179,6 +180,7 @@ const RegisterUser = () => {
                               onChange={(phone, country) =>
                                 setFieldValue("Phone", phone)
                               }
+                              required
                             />
                             {meta.touched && meta.error && (
                               <p
