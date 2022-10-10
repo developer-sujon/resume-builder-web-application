@@ -11,7 +11,7 @@ const EmploymentHistory = (values) => {
         render={(arrayHelpers) => (
           <div>
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white mt-5">
-              Add Experience{" "}
+              Add Experience
               <button type="button">
                 <AiOutlinePlus
                   onClick={() =>
@@ -19,11 +19,15 @@ const EmploymentHistory = (values) => {
                       CompanyName: "",
                       CompanyBusiness: "",
                       Designation: "",
-                      Department: "",
+                      Department: {
+                        name: "",
+                        exp: "",
+                      },
                       StartDate: "",
                       EndDate: "",
                       Responsibilities: "",
                       CompanyLocation: "",
+                      InOffice: false,
                     })
                   }
                 />
@@ -67,14 +71,36 @@ const EmploymentHistory = (values) => {
                       />
                     </div>
                     <div className="px-[15px] w-full md:w-6/12">
-                      <MyInputField
-                        index={index}
-                        name="Department"
-                        type="text"
-                        label="Department"
-                        placeholder=""
-                        require={true}
-                      />
+                      <div className="flex flex-col">
+                        <label className="mb-2">
+                          Employee type?{" "}
+                          <span className="text-red-600 ml-1">*</span>
+                        </label>
+                        <div className="flex items-center mr-4">
+                          <MyInputRadioField
+                            index={index}
+                            name="JobType"
+                            label="Remort"
+                            id="Remort"
+                            value="Remort"
+                          />
+                          <MyInputRadioField
+                            index={index}
+                            name="JobType"
+                            label="In Office"
+                            id="InOffice"
+                            value="InOffice"
+                          />
+                        </div>
+                        <p
+                          id="filled_error_help"
+                          className="mt-2 text-md text-red-600 dark:text-red-400"
+                        >
+                          <ErrorMessage
+                            name={`Specialization.${index}.${"HowDidYouLearn"}`}
+                          />
+                        </p>
+                      </div>
                     </div>
                   </div>
                   <div className="flex flex-wrap mx-[-15px] mb-3">
@@ -121,6 +147,86 @@ const EmploymentHistory = (values) => {
                           </p>
                         </div>
                       </div>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-wrap mx-[-15px] mb-3">
+                    <div className="px-[15px] w-full md:w-6/12">
+                      <FieldArray
+                        name={`EmploymentHistorys.${index}.Department`}
+                        render={(arrayHelpers) => (
+                          <>
+                            Add Department
+                            <button type="button">
+                              <AiOutlinePlus
+                                onClick={() =>
+                                  arrayHelpers.push({
+                                    name: "",
+                                    exp: "",
+                                  })
+                                }
+                              />
+                            </button>
+                            {values.EmploymentHistorys &&
+                              values.EmploymentHistorys[index].Department &&
+                              values.EmploymentHistorys[index].Department
+                                .length > 0 &&
+                              values.EmploymentHistorys[index].Department.map(
+                                (item, depindex) => {
+                                  return (
+                                    <div key={depindex}>
+                                      <div
+                                        className="flex flex-wrap mx-[-15px] mb-3"
+                                        key={depindex}
+                                      >
+                                        <div className="px-[15px] w-full md:w-6/12">
+                                          <label
+                                            htmlFor=""
+                                            className="inline-block my-3 md:my-0 md:mb-2 text-sm font-medium text-gray-900 dark:text-white "
+                                          >
+                                            Name
+                                          </label>
+
+                                          <Field
+                                            id=""
+                                            type="text"
+                                            name={`EmploymentHistorys.${index}.Department.${depindex}.name`}
+                                            placeholder=""
+                                            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                          />
+                                        </div>
+                                        <div className="px-[15px] w-full md:w-6/12">
+                                          <label
+                                            htmlFor=""
+                                            className="inline-block my-3 md:my-0 md:mb-2 text-sm font-medium text-gray-900 dark:text-white "
+                                          >
+                                            Exp
+                                          </label>
+                                          <Field
+                                            id=""
+                                            type="number"
+                                            name={`EmploymentHistorys.${index}.Department.${depindex}.exp`}
+                                            placeholder=""
+                                            className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                          />
+                                        </div>
+                                      </div>
+                                      <button
+                                        type="button"
+                                        onClick={() =>
+                                          arrayHelpers.remove(index)
+                                        }
+                                        class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                                      >
+                                        <IoIosRemoveCircleOutline />
+                                      </button>
+                                    </div>
+                                  );
+                                },
+                              )}
+                          </>
+                        )}
+                      />
                     </div>
                   </div>
 
@@ -211,6 +317,27 @@ const MyInputField = ({ index, name, type, label, placeholder, require }) => {
       >
         <ErrorMessage name={`EmploymentHistorys.${index}.${name}`} />
       </p>
+    </>
+  );
+};
+
+const MyInputRadioField = ({ index, name, label, id, value }) => {
+  return (
+    <>
+      <Field
+        id={id + index}
+        type="radio"
+        name={`EmploymentHistorys.${index}.${name}`}
+        value={value}
+        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+      />
+
+      <label
+        htmlFor={id + index}
+        className="text-sm font-medium text-gray-900 dark:text-gray-300  mx-2"
+      >
+        {label}
+      </label>
     </>
   );
 };

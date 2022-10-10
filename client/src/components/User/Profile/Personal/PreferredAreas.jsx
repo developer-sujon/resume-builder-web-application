@@ -131,10 +131,6 @@ const PreferredAreas = () => {
             }) => (
               <Select
                 closeMenuOnSelect={false}
-                defaultValue={[
-                  values?.PreferredJobLocationInsideBangladesh[0],
-                  values?.PreferredJobLocationInsideBangladesh[1],
-                ]}
                 isMulti
                 name="colors"
                 options={countryOptions}
@@ -164,10 +160,6 @@ const PreferredAreas = () => {
             }) => (
               <Select
                 closeMenuOnSelect={false}
-                defaultValue={[
-                  values?.PreferredJobLocationOutsideBangladesh[0],
-                  values?.PreferredJobLocationOutsideBangladesh[1],
-                ]}
                 isMulti
                 name="colors"
                 options={PreferredJobLocationOutsideBangladeshList}
@@ -199,10 +191,6 @@ const PreferredAreas = () => {
             }) => (
               <Select
                 closeMenuOnSelect={false}
-                defaultValue={[
-                  values?.PreferredOrganization[0],
-                  values?.PreferredOrganization[1],
-                ]}
                 isMulti
                 name="colors"
                 options={PreferredOrganizationList}

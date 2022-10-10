@@ -253,7 +253,17 @@ const SingleTemplateOne = forwardRef(({ UserDetails }, ref) => {
                     className="BDJNormalText01"
                     style={{ paddingLeft: 5 }}
                   >
-                    <strong>Total Year of Experience :</strong> 1.8 yrs
+                    <strong>Total Year of Experience : </strong>
+                    {UserDetails?.EmploymentHistorys?.map((employment) => {
+                      const sum = employment.Department.reduce(
+                        (accumulator, value) => {
+                          return accumulator + Number(value.exp);
+                        },
+                        0,
+                      );
+
+                      return sum.toFixed(0) + " yrs";
+                    })}
                   </td>
                 </tr>
               </tbody>
@@ -292,7 +302,8 @@ const SingleTemplateOne = forwardRef(({ UserDetails }, ref) => {
                         <br />
                         <span className="BDJNormalText06">
                           {" "}
-                          ({employment?.StartDate} - {employment?.EndDate})
+                          ({employment?.StartDate} -{" "}
+                          {employment?.EndDate || "Continu"})
                         </span>
                         <br />
                       </th>
@@ -318,7 +329,14 @@ const SingleTemplateOne = forwardRef(({ UserDetails }, ref) => {
                         <strong>Area of Expertise</strong>
                         <br />
                         <span className="BDJNormalText06">
-                          {employment?.Department} (0.8 yr)
+                          {employment?.Department &&
+                            employment?.Department.map((item, index) => {
+                              return (
+                                <span key={index}>
+                                  {item.name}&nbsp; ( {item.exp} year)&nbsp;
+                                </span>
+                              );
+                            })}
                         </span>
                         <br />
                         <strong>Duties/Responsibilities</strong>
@@ -1141,7 +1159,11 @@ const SingleTemplateTwo = forwardRef(({ UserDetails }, ref) => {
                   <td colSpan={6}>&nbsp;</td>
                 </tr>
                 <tr>
-                  <td colSpan={6} className="BDJHeadline01">
+                  <td
+                    colSpan={6}
+                    className="BDJHeadline01"
+                    style={{ backgroundColor: "transparent" }}
+                  >
                     <u>Career Objective:</u>
                   </td>
                 </tr>
@@ -1173,7 +1195,11 @@ const SingleTemplateTwo = forwardRef(({ UserDetails }, ref) => {
             >
               <tbody>
                 <tr>
-                  <td colSpan={6} className="BDJHeadline01">
+                  <td
+                    colSpan={6}
+                    className="BDJHeadline01"
+                    style={{ backgroundColor: "transparent" }}
+                  >
                     <u>Career Summary:</u>
                   </td>
                 </tr>
@@ -1206,7 +1232,11 @@ const SingleTemplateTwo = forwardRef(({ UserDetails }, ref) => {
             >
               <tbody>
                 <tr>
-                  <td colSpan={6} className="BDJHeadline01">
+                  <td
+                    colSpan={6}
+                    className="BDJHeadline01"
+                    style={{ backgroundColor: "transparent" }}
+                  >
                     <u>Special Qualification:</u>
                   </td>
                 </tr>
@@ -1218,7 +1248,7 @@ const SingleTemplateTwo = forwardRef(({ UserDetails }, ref) => {
                     style={{
                       paddingLeft: 5,
                       wordBreak: "break-word",
-                      backgroundColor: "#1182",
+                      backgroundColor: "transparent",
                       color: "#fff",
                     }}
                   >
@@ -1238,22 +1268,33 @@ const SingleTemplateTwo = forwardRef(({ UserDetails }, ref) => {
             >
               <tbody>
                 <tr>
-                  <td colSpan={6} className="BDJHeadline01">
+                  <td
+                    colSpan={6}
+                    className="BDJHeadline01"
+                    style={{ backgroundColor: "transparent" }}
+                  >
                     <u>Employment History:</u>
                   </td>
                 </tr>
+
                 <tr>
                   <td
                     colSpan={6}
                     align="left"
-                    className="BDJNormalText01 bg-gray-900"
-                    style={{
-                      paddingLeft: 5,
-                      backgroundColor: "#1182",
-                      color: "#fff",
-                    }}
+                    className="BDJNormalText01"
+                    style={{paddingLeft: 5, backgroundColor: "transparent" }}
                   >
-                    <strong>Total Year of Experience :</strong> 1.8 yrs
+                    <strong>Total Year of Experience : </strong>
+                    {UserDetails?.EmploymentHistorys?.map((employment) => {
+                      const sum = employment.Department.reduce(
+                        (accumulator, value) => {
+                          return accumulator + Number(value.exp);
+                        },
+                        0,
+                      );
+
+                      return sum.toFixed(0) + " yrs";
+                    })}
                   </td>
                 </tr>
               </tbody>
@@ -1360,7 +1401,14 @@ const SingleTemplateTwo = forwardRef(({ UserDetails }, ref) => {
                             color: "#fff",
                           }}
                         >
-                          {employment?.Department} (0.8 yr)
+                          {employment?.Department &&
+                            employment?.Department.map((item, index) => {
+                              return (
+                                <span key={index}>
+                                  {item.name}&nbsp; ( {item.exp} year)&nbsp;
+                                </span>
+                              );
+                            })}
                         </span>
                         <br />
                         <strong>Duties/Responsibilities</strong>
@@ -1384,7 +1432,7 @@ const SingleTemplateTwo = forwardRef(({ UserDetails }, ref) => {
             >
               <tbody>
                 <tr>
-                  <td colSpan={6} className="BDJHeadline01">
+                  <td colSpan={6} className="BDJHeadline01" style={{ backgroundColor: "transparent" }}>
                     <u>Academic Qualification:</u>
                   </td>
                 </tr>
@@ -1526,7 +1574,7 @@ const SingleTemplateTwo = forwardRef(({ UserDetails }, ref) => {
             >
               <tbody>
                 <tr>
-                  <td colSpan={6} className="BDJHeadline01">
+                  <td colSpan={6} className="BDJHeadline01" style={{ backgroundColor: "transparent" }}>
                     <u>Career and Application Information:</u>
                   </td>
                 </tr>
@@ -1697,7 +1745,7 @@ const SingleTemplateTwo = forwardRef(({ UserDetails }, ref) => {
             >
               <tbody>
                 <tr>
-                  <td colSpan={6} className="BDJHeadline01">
+                  <td colSpan={6} className="BDJHeadline01" style={{ backgroundColor: "transparent" }}>
                     <u>Specialization:</u>
                   </td>
                 </tr>
@@ -1767,7 +1815,7 @@ const SingleTemplateTwo = forwardRef(({ UserDetails }, ref) => {
             >
               <tbody>
                 <tr>
-                  <td colSpan={6} className="BDJHeadline01">
+                  <td colSpan={6} className="BDJHeadline01" style={{ backgroundColor: "transparent" }}>
                     <u>Language Proficiency:</u>
                   </td>
                 </tr>
@@ -1887,7 +1935,7 @@ const SingleTemplateTwo = forwardRef(({ UserDetails }, ref) => {
             >
               <tbody>
                 <tr>
-                  <td colSpan={6} className="BDJHeadline01">
+                  <td colSpan={6} className="BDJHeadline01" style={{ backgroundColor: "transparent" }}>
                     <u>Personal Details :</u>
                   </td>
                 </tr>

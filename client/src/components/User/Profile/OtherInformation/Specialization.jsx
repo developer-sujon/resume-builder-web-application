@@ -210,7 +210,7 @@ const MyInputRadioField = ({ index, name, label, id, value }) => {
   return (
     <>
       <Field
-        id={id}
+        id={id + index}
         type="radio"
         name={`Specialization.${index}.${name}`}
         value={value}
@@ -218,7 +218,7 @@ const MyInputRadioField = ({ index, name, label, id, value }) => {
       />
 
       <label
-        htmlFor={id}
+        htmlFor={id + index}
         className="text-sm font-medium text-gray-900 dark:text-gray-300  mx-2"
       >
         {label}
@@ -226,3 +226,4 @@ const MyInputRadioField = ({ index, name, label, id, value }) => {
     </>
   );
 };
+

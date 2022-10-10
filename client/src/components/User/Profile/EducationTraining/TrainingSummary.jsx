@@ -92,13 +92,17 @@ const TrainingSummary = (values) => {
                       />
                     </div>
                     <div className="px-[15px] w-full md:w-6/12">
-                      <MyInputField
+                      <MySelectField
                         index={index}
                         name="Duration"
-                        type="text"
                         label="Duration"
-                        placeholder=""
                         require={true}
+                        options={[
+                          { name: "1Month" },
+                          { name: "2Month" },
+                          { name: "3Month" },
+                          { name: "4Month" },
+                        ]}
                       />
                     </div>
                   </div>
@@ -178,7 +182,9 @@ const MySelectField = ({ index, name, label, require, options }) => {
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
       >
         {options.map((option, i) => (
-          <option value={option.name} key={i}>{option.name}</option>
+          <option value={option.name} key={i}>
+            {option.name}
+          </option>
         ))}
       </Field>
     </>
