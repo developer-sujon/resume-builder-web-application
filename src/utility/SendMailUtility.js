@@ -3,8 +3,8 @@ const nodemailer = require("nodemailer");
 
 const SendMailUtility = async (emailTo, emailText, emailSubject) => {
   let transporter = await nodemailer.createTransport({
-    name: "mail.sujon.one",
-    host: "mail.sujon.one",
+    name: "mail.devsujon.com",
+    host: "mail.devsujon.com",
     port: 25,
     secure: false,
     auth: {
@@ -17,7 +17,7 @@ const SendMailUtility = async (emailTo, emailText, emailSubject) => {
   });
 
   const mailOption = {
-    from: `${process.env.APPLICATION_NAME} <contact@sujon.one>`,
+    from: `${process.env.APPLICATION_NAME} <contact@devsujon.com>`,
     to: emailTo,
     subject: emailSubject,
     html: emailText,
