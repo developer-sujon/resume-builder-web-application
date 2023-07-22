@@ -8,7 +8,7 @@ import { RemoveUserDetails } from "../redux/slices/UserSlice";
 import store from "../redux/store/store";
 
 //Axios default setting
-axios.defaults.baseURL = "https://resume-builder-web-application-production.up.railway.app/api/v1";
+axios.defaults.baseURL = "https://comfortable-pink-poncho.cyclic.app/api/v1";
 axios.defaults.headers.post["Content-Type"] =
   "application/x-www-form-urlencoded";
 

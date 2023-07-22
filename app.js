@@ -1,3 +1,18 @@
+import Conference from "./component/Conference";
+import Herosection from "./component/Herosection";
+import Sponsors from "./component/Sponsors";
+
+export default function Home() {
+  return (
+    <>
+      <Herosection />
+      <Conference />
+      <Sponsors />
+    </>
+  );
+}
+
+
 //External Import
 const express = require("express");
 const morgan = require("morgan");
@@ -74,13 +89,13 @@ connectDB(MONGODB_CONNECTION_URL, DB_OPTIONS);
 // Routing Implement
 app.use("/api/v1", routes);
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-  // Add React Front End Routing
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
-}
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static("client/build"));
+//   // Add React Front End Routing
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+//   });
+// }
 
 //static file
 app.use("/", express.static(path.join(__dirname, "public")));
